@@ -1,0 +1,105 @@
+body {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: rgb(255, 255, 255);
+    color: #333333; /* Texto em tom de cinza escuro */
+}
+
+.menu-container {
+    position: fixed;
+    background: linear-gradient(180deg, #0c1b5f, #130d3d); 
+    height: 100vh;
+    width: 15%;
+    box-shadow: 2px 0 15px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+    padding: 20px 10px;
+    overflow-y: auto; /* Adiciona rolagem se o conteúdo do menu ultrapassar a altura */
+}
+
+.logo {
+    display: block;
+    width: 80%;
+    margin: 20px auto;
+    border-radius: 10px;
+    filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.5));
+}
+
+.items ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 30px;
+}
+
+.items ul li {
+    margin: 20px 0;
+}
+
+.items a {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: white;
+    padding: 10px;
+    display: block;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.items a:not(.bla):hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateX(10px);
+}
+
+
+.content {
+    margin-left: 15%; /* Deixa espaço para o menu fixo */
+    padding: 3em;
+    background-color: #ffffff;
+    overflow-y: auto; /* Permite rolagem se o conteúdo ultrapassar a altura da tela */
+}
+
+article {
+    margin-left: 3.5vw;
+    width: 70vw;
+    margin-bottom: 2em;
+    padding: 2em;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.5));
+}
+
+article h2 {
+    color: #2a158a;
+    font-size: 1.8rem;
+    margin-bottom: 1em;
+    border-bottom: 2px solid #150446;
+    padding-bottom: 0.5em;
+}
+
+p {
+    line-height: 1.8;
+    font-size: 1.1rem;
+    margin-bottom: 1.5em;
+    text-align: justify;
+}
+
+p:first-of-type {
+    font-weight: bold;
+    color: #555;
+}
+
+@media (max-width: 600px) {
+    .menu-container {
+        width: 100%; /* O menu ocupa toda a largura da tela em dispositivos menores */
+        height: auto; /* Ajusta a altura para caber o conteúdo */
+        position: relative; /* Muda a posição para permitir a rolagem */
+    }
+
+    .content {
+        margin-left: 0;
+        padding: 1em;
+    }
+}

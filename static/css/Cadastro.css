@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: rgb(230, 230, 230);
+}
+
+.textbox .eye1 {
+    position: absolute;
+    left: 45vw;
+    top: 49.3vh;
+    transform: translateY(-50%);
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+}
+.textbox .eye2 {
+    position: absolute; 
+    left: 45vw;
+    top: 57.2vh;
+    transform: translateY(-50%);
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+}
+
+.register-container {
+    padding-left: 10vw;
+    width: 81.5vw;
+    padding: 40px;
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.5);
+    background-color: #ffffff;
+    display: flex;
+    padding-right: 30vw;
+    flex-direction: column;
+    position: absolute;
+    justify-content: center;
+    left: 9vw;
+    top: 4vh;
+    padding-top: 20vh;
+    border-radius: 20px;
+    padding-bottom: 9.42vh;
+    height: 90vh;
+}
+.register-form h1 {
+    margin-bottom: 10px;
+}
+.register-form p {
+    margin-bottom: 20px;
+}
+.register-form input {
+    display: block;
+    margin-bottom: 15px;
+    padding: 10px;
+    width: 45vw;
+    font-size: 16px;
+    border: 1px solid #060606;
+    border-radius: 5px;
+}
+
+.register-form a:hover {
+    text-decoration: underline;
+}
+.register-form .btn {
+    padding: 10px;
+    font-size: 16px;
+    color: white;
+    background-color: #920c0c;
+    border: none;
+    border-radius: 5px;
+    width: 45vw;
+    cursor: pointer;
+}
+.register-form .btn:hover {
+    background-color: #610707;
+}
+.cs {
+    position: absolute;
+    width: 13vw;
+    right: 7.7vw;
+    top: 35vh;
+    z-index: 1;
+}
+.etec {
+    width: 9vw;
+    position: absolute;
+    top: 4vh;
+    left: 21vw;
+    
+}
+form {
+    display: block;
+}
+.barra {
+    top: 0vh;
+    height: 100%;
+    width: 28.5vw;
+    left: 53vw;
+    background-color: rgba(79, 172, 254, 0.4);
+    position: absolute; 
+    border-radius: 0px 20px 20px 0px;
+}
+
+#codetec{
+width: 10vw;
+height: 5vh;
+padding: 10px;
+border-radius: 8px;
+}
+.barra h2{
+
+position: absolute;
+top: 20vh;
+left: 5vw;
+font-size: 2vw;
+}
+.barra p{
+position: absolute;
+top: 25vh;
+left: 7.5vw;
+}
+
+.casa{
+    width: 3vw;
+    position: absolute;
+    top: 6vh;
+    left: 3vw;
+}
+
+
+.home{
+    position: absolute;
+    top: 12.6vh;
+    left: 3.2vw;
+}

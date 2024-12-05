@@ -1,0 +1,60 @@
+create database cooksytem;
+use cooksytem;
+
+
+create table banco_alunos(
+nome varchar(50),
+RM char(5) primary key,
+codetec char(3),
+sala varchar(50)  
+);
+
+
+create table salas(
+nome_sala varchar(50) , 
+codetec char(3) not null,
+id int  primary key);
+
+INSERT INTO cooksytem.salas
+(nome_sala, codetec, id)
+VALUES('1º DESENVOLVIMENTO DE SISTEMAS', '088', 1),('1º ENSINO MÉDIO', '088', 2),('1º MECATRÔNICA', '088', 3),
+('2º DESENVOLVIMENTO DE SISTEMAS', '088', 4),('2º ENSINO MÉDIO', '088', 5),('2º MECATRÔNICA', '088', 6),
+('3º DESENVOLVIMENTO DE SISTEMAS', '088', 7),('3º MECATRÔNICA', '088', 8),('3º ENSINO MÉDIO', '088', 9);
+
+
+create table cadastro_aluno(
+RM char(5)  primary key not null,
+senha varchar(100)
+);
+
+
+create table agenda(
+    RM char(5),
+    estado char(3),
+    id int AUTO_INCREMENT,
+    primary key(id)
+);
+
+create table cardapio(
+	data date,
+	description VARCHAR(50),
+	primary key(data)
+	
+);
+
+
+create table session(
+nome varchar(50),
+rm char(5),
+id int AUTO_INCREMENT,
+primary key(id)
+);
+
+
+
+create table Admin(
+username varchar(30),
+email varchar(50),
+senha varchar(100),
+primary key(email)
+);

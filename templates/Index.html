@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="{{url_for('static', path='./css/style.css')}}"> 
+
+    <link rel="icon" href="static/img/logocps.png" type="image/x-icon">
+    
+    <!--  -->
+</head>
+<body>
+    <div class="box">
+        <h1>COOK SYSTEM</h1>
+        <img src="{{url_for('static', path='/img/etec.png')}}" id="icone">  <!-- -->
+        <img src="{{url_for('static', path='/img/logocps.png')}}" id="cps"> <!-- -->
+        <img src="{{url_for('static', path='/img/cs.png')}}" id="etec"> <!-- -->
+    </div>
+    <div class="menu">
+
+        <ul>
+            <a href={{ url_for('Login') }}><li>Login</li></a>
+            <a href={{ url_for('Sobre') }}><li>Sobre</li></a>
+            <a href="https://www.instagram.com/cook_system/"><li>Instagram</li></a>
+            <a href={{ url_for('Admin') }}><li>Admin</li></a>
+        </ul>
+    </div>
+    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" type="image/svg+xml">
+    <div class="text">
+        <h1>Um Sistema rápido e <br> prático no ambiente <br> escolar!</h1>
+    </div>
+      <img src="{{url_for('static', path='/img/refeitorio.jpeg')}}" width="100%" id="ref">  <!-- -->
+    
+    <a href={{ url_for('Cadastro') }}><input type="button" value="INSCREVA-SE" id="button1"></a>
+
+    <footer class="rodape">
+
+        <ul class="lista-rodape">
+        <h2 class="rodape__titulo">COOK SYSTEM</h2>
+        <li class="lista-rodape__item">
+            <img src="../static/img/cs.png" class="cook_footer">
+        </li>
+        </ul>
+
+        <ul class="lista-rodape">
+        <h2 class="rodape__titulo">
+            DESENVOLVEDORES
+        </h2>
+        <li class="lista-rodape__item">
+            Lucas Castilho Vieira
+        </li>
+        <li class="lista-rodape__item">
+            Marcos Anotonio Cirino Alves
+        </li>
+        </ul>
+
+        <ul class="lista-rodape">
+            <h2 class="rodape__titulo">
+                INSTITUIÇÃO
+            </h2>
+            <li class="lista-rodape__item">
+                Etec Monsenhor Antonio Magliano
+            </li>
+        </ul>
+
+        <div class="whatsapp-icon">
+            <a href="https://wa.me/554797071242" target="_blank" id="whatsapp-link">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" class="whatsapp-icon-img">
+                <span class="whatsapp-tooltip">Clique para conversar com o atendimento eletrônico</span>
+            </a>
+        </div>
+
+    </footer>
+
+
+
+
+    <script>
+        var a = window.document.getElementById('button1');
+        a.addEventListener('mouseenter', entrar);
+        a.addEventListener('mouseout', sair);
+        function entrar() {
+            a.style.background = 'rgb(179, 9, 9)';
+        }
+        function sair() {
+            a.style.background = '';
+        }
+        history.pushState(null, null, location.href);
+        window.addEventListener('popstate', function (event) {
+            // Sempre empurra o estado atual para bloquear o retorno
+            history.pushState(null, null, location.href);
+        
+        });
+    </script>
+</body>

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendamento</title>
+    <link rel="icon" href="static/img/logocps.png" type="image/x-icon">
+    <link rel="stylesheet" href="{{url_for('static', path='./css/banco.css')}}">
+    <style>
+
+        .toast {
+            visibility: hidden;
+            min-width: 300px;
+            margin: 0 auto;
+            background-color: #4caf50;
+            color: white;
+            text-align: left;
+            border-radius: 5px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+            font-size: 16px;
+        }
+    
+        .toast.show {
+            visibility: visible;
+            animation: fadeInOut 3s ease-in-out;
+        }
+    
+        @keyframes fadeInOut {
+            0%, 100% {
+                opacity: 0;
+                transform: translateX(-50%) translateY(20px);
+            }
+            10%, 90% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+    
+        .toast .icon {
+            margin-right: 10px;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    
+        .toast .icon i {
+            color: white;
+        }
+    
+
+
+
+
+
+        .icon-update {
+            cursor: pointer;
+            margin-left: 10px;
+            vertical-align: middle;
+            width: 1.5vw;
+        }
+
+        .update-form-container {
+            display: none;
+            margin-bottom: 20px;
+        }
+
+
+        .update-form-container button {
+            margin-top: 15px;
+        }
+ 
+
+
+        .update-form-container select {
+            margin-top: 10px;
+            width: 20vw; /* Largura ajustada */
+            height: 6vh;
+            font-size: 1.1vw; /* Tamanho da fonte adequado */
+            border-radius: 12px; /* Borda arredondada */
+            padding-left: 12px; /* Aumenta o preenchimento interno */
+            background-color: white; /* Fundo branco */
+            color: #333; /* Texto escuro para bom contraste */
+            border: 2px solid #6f1313; /* Borda vermelha */
+            transition: all 0.3s ease; /* Transições suaves */
+        }
+        
+        .update-form-container select:hover {
+            border-color: #6f1313; /* Borda mais clara ao passar o mouse */
+        }
+        
+        .update-form-container select:focus {
+            outline: none; /* Remove o contorno padrão */
+            box-shadow: 0 0 5px rgba(255, 0, 0, 0.8); /* Sombra vermelha suave ao focar */
+        }
+        
+     
+        .atualizar {
+            padding: 15px 25px; /* Tamanho do botão */
+            font-size: 1.1vw; /* Tamanho da fonte */
+            border-radius: 12px; /* Borda arredondada */
+            background: linear-gradient(90deg, #8c2c37, #430404);
+            color: white; /* Texto branco */
+            border: none; /* Remove borda padrão */
+            cursor: pointer; /* Indica que é clicável */
+            transition: all 0.3s ease;
+            width: 16vw; 
+            text-align: center; 
+            display: block;
+            margin-top: 15px; 
+        }
+        
+        .atualizar:hover {
+            background: linear-gradient(90deg, #e72a40, #430404);
+            transform: scale(1.05);
+        }
+        
+        .atualizar:focus {
+            outline: none; /* Remove o contorno padrão */
+            box-shadow: 0 0 5px rgba(255, 0, 0, 0.8); /* Sombra vermelha ao focar */
+        }
+        .items ul li.active a {
+            background: rgba(255, 255, 255, 0.4); /* Fundo mais claro para o item ativo */
+            color: #fff; /* Mantém o texto branco */
+            font-weight: bold; /* Destaca o texto */
+            transform: translateX(10px); /* Destaca visualmente */
+        }
+        
+    </style>
+</head>
+<body>
+
+    <div class="nomes">
+        Olá, {{nome}}!
+    </div>
+
+    <div class="menu-container">
+        <img src="{{url_for('static', path='/img/cs.png')}}" class="logo">
+
+        <div class="items">
+            <ul>
+                <li class="{% if current_path == url_for('CriarBanco') %}active{% endif %}">
+                    <a href="{{ url_for('CriarBanco') }}">Lista</a>
+                </li> <br>
+                <li class="{% if current_path == url_for('Cardapio') %}active{% endif %}">
+                    <a href="{{ url_for('Cardapio') }}">Cardápio</a>
+                </li> <br>
+                <li class="{% if current_path == url_for('Busca') %}active{% endif %}">
+                    <a href="{{ url_for('Busca') }}" class="bla" style= "
+                    background: rgba(255, 255, 255, 0.2);
+                    
+                ">Buscar Aluno</a>
+                </li> <br>
+                <li class="{% if current_path == url_for('ADM') %}active{% endif %}">
+                    <a href="{{ url_for('ADM') }}">Dashboard</a>
+                </li> <br>
+                <br>
+                <p></p>
+                <li class="sair"><a href={{ url_for('Admin') }}> Sair </a></li>
+
+            </ul>
+        </div>
+    </div>
+
+    <div class="container">
+          <!-- Formulário de atualização exibido acima da tabela -->
+          <div class="update-form-container" id="updateFormContainer">
+            <h2>Atualizar Informações</h2>
+            <br>
+            <form action="/update" method="post" id="updateForm">
+                <label for="Nome">Nome</label>
+                <br>
+                <input type="text" id="nome" name="nome"  readonly>
+
+                <label for="rm">Número de RM</label>
+                <br>
+                <input type="text" id="rm" name="rm" readonly >
+
+                <label for="Sala">Sala</label>
+                <br>
+                <input type="text" id="codigo_etec" name="codigo_etec" readonly >
+
+                <label for="estadoo">ESTADO DE ALMOÇO</label><br>
+                <select id="estado" name="estado" class= "estado" required>
+                    <option value=""disabled selected>ESCOLHA...</option>
+                    <option value="SIM">SIM</option>
+                    <option value="NÃO">NÃO</option>
+                </select>
+                <button type="submit" class="atualizar">Atualizar</button>
+            </form>
+        </div>
+        <p class="description">
+            Aqui você pode buscar informações específicas dos alunos e atualiza-lás. Use o campo de busca abaixo 
+            para filtrar os resultados com base no nome, sala ou RM. À medida que você digita, a tabela será atualizada 
+            automaticamente para exibir apenas as informações correspondentes à sua pesquisa.
+        </p>
+        <input type="text" id="searchInput" placeholder="Buscar por nome, sala ou RM..." onkeyup="searchTable()">
+        
+      
+
+        <table id="dataTable">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Sala</th>
+                    <th>RM</th>
+                    <th>Atualizar</th> <!-- Nova coluna para ícone de editar -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for nome, sala, rm in info %}
+                <tr>
+                    <td>{{nome}}</td>
+                    <td>{{sala}}</td>
+                    <td>{{rm}}</td>
+                    <!-- Ícone para atualização -->
+                    <td><img src="{{url_for('static', path='/img/editar.png')}}" alt="Atualizar" class="icon-update" onclick="showUpdateForm('{{rm}}', '{{nome}}', '{{sala}}')"></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+    <script>
+        function searchTable() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const rows = document.querySelectorAll('#dataTable tbody tr');
+        
+            rows.forEach((row) => {
+                const cells = row.getElementsByTagName('td');
+                const name = cells[0].textContent.toLowerCase();
+                const room = cells[1].textContent.toLowerCase();
+                const rm = cells[2].textContent.toLowerCase();
+        
+                // Verifica se algum valor da linha corresponde à busca
+                const matchesSearch = name.includes(input) || room.includes(input) || rm.includes(input);
+        
+                // Exibe ou oculta as linhas com base na busca
+                row.style.display = matchesSearch ? '' : 'none';
+            });
+        }
+        
+        window.onload = function () {
+            searchTable(); // Garante que a tabela seja exibida corretamente ao carregar a página
+        };
+
+        // Função para exibir o formulário de atualização e preencher com as informações do aluno
+        function showUpdateForm(rm, nome, sala) {
+            document.getElementById('updateFormContainer').style.display = 'block';
+            document.getElementById('nome').value = nome;
+            document.getElementById('rm').value = rm;
+            document.getElementById('codigo_etec').value = sala;
+            document.getElementById('estado').value = '';  // Ou o valor que você deseja definir inicialmente
+        }
+    </script>
+    {% if msg %}
+
+        
+    <div id="toast" class="toast">
+        <div class="icon">
+            ✔️
+        </div>
+        <div class="message">
+            Aluno atualizado com sucesso!
+        </div>
+    </div>
+
+    <script>
+        function showToast() {
+            const toast = document.getElementById("toast");
+            toast.classList.add("show");
+
+            // Remover o toast após 3 segundos
+            setTimeout(() => {
+                toast.classList.remove("show");
+            }, 3000);
+        }
+
+        // Chamar a função automaticamente quando a página carregar
+        window.onload = function() {
+            showToast();
+        };
+    </script>
+    {% endif %} 
+</body>
+</html>

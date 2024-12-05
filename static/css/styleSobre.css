@@ -1,0 +1,240 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+:root {
+    --azulCookSystem: #003e6f;
+    --cinzaEscuro: #474747;
+    --creme: #f5f5f5;
+    --grafite: #292929;
+    --vermelhoCps: #ab0f14;    
+}
+
+::-webkit-scrollbar {
+    width: 20px;
+    padding: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--vermelhoCps);
+    border: 5px solid var(--cinzaEscuro);
+    border-radius: 20px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--cinzaEscuro);    
+}
+
+/* Geral */
+html {
+    width: 100vw;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+    background-color: var(--creme);
+}
+
+nav, footer {
+    align-items: center;
+    background-color: var(--grafite);
+    display: flex;
+    height: 20vh;
+    justify-content: center;
+    width: 100vw;
+}
+
+footer {
+    margin-top: 3%;
+}
+
+/* Topo e Títulos */
+.box img {
+    width: 7vw;
+    height: 7vw;
+}
+
+.box {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 2%;
+    justify-content: space-between;
+    height: 90%;
+    width: 90%;   
+    align-items: center;
+    display: inline-flex;
+}
+
+.title {
+    color: var(--creme);
+    font-family: "Rubik";
+    font-size: 2.8rem;
+}
+
+/* Texto Geral */
+.texto-box {
+    font-size: 1.6rem;
+    text-align: justify;
+    line-height: 1.6;
+    color: var(--grafite);
+}
+
+.text-box {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-left: 9vw;
+    padding-right: 9vw;
+    padding-top: 10vh;
+}
+
+strong {
+    color: var(--vermelhoCps);
+}
+
+/* Área Principal */
+.main-principal {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: auto;
+    padding-bottom: 3%;
+    width: 100%;
+}
+
+p.title {
+    color: var(--vermelhoCps);
+    font-family: "Rubik";
+    font-size: 2.2rem;
+    font-weight: bold;
+    padding: 10vh;
+}
+
+.devs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding-left: 10%;
+    padding-right: 10%;
+    width: 60vw;
+}
+
+/* Imagens e Efeitos */
+.container-img {
+    border-radius: 50px;
+    box-shadow: 3px 3px 18px 8px var(--cinzaEscuro);
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    width: 40%;
+}
+
+.dev {
+    height: auto;
+    transition: 0.3s ease;
+    width: 100%;
+}
+
+.texto {
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;    
+    font-size: 20px;
+    font-weight: bold;
+    left: 50%;
+    opacity: 0;
+    padding: 8px;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.3s ease;
+    width: 50%;
+}
+
+.container-img:hover .dev {
+    filter: brightness(50%);
+}
+
+.container-img:hover .texto {
+    opacity: 1;
+}
+
+/* objetivo, princípios, meta */
+.texto-titulo {
+    align-items: center;
+    color: var(--vermelhoCps);
+    display: flex;
+    font-family: "Rubik";
+    font-size: 2.2rem;
+    font-weight: bold;
+    justify-content: center;
+    padding: 2%;   
+}
+
+.lista-texto {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+
+.lista-texto-item {
+    align-items: center;
+    color: var(--grafite);
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 1.6rem;
+    line-height: 1.6;
+    list-style-type: none;
+    justify-content: center;    
+    text-align: justify;
+    text-decoration: none;
+}
+
+
+/*botão*/
+a {
+    margin: 5%;
+    transition: .7s;
+    width: 12vw;
+}
+
+a:hover {
+    transform: scale(1.05);
+}
+
+button {
+    background-color: var(--azulCookSystem);
+    border: none;
+    border-radius: 20px;
+    color: var(--creme);
+    cursor: pointer;
+    font-family: "Rubik";
+    font-size: 1.5rem;
+    padding: 6%;
+    width: 100%;
+    
+}
+
+/* Ajuste Responsivo */
+@media (max-width: 768px) {
+    .texto_box {
+        margin: 20px;
+        font-size: 18px;
+    }
+
+    .title {
+        font-size: 28px;
+    }
+
+    .texto {
+        font-size: 16px;
+        padding: 8px;
+    }
+}

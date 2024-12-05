@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lançamento de Cardápio</title>
+    <link rel="stylesheet" href="{{url_for('static', path='/css/Cardapio.css')}}">
+    <link rel="icon" href="static/img/logocps.png" type="image/x-icon">
+    <style>
+        .toast {
+            visibility: hidden;
+            min-width: 300px;
+            margin: 0 auto;
+            background-color: #4caf50;
+            color: white;
+            text-align: left;
+            border-radius: 5px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+            font-size: 16px;
+        }
+    
+        .toast.show {
+            visibility: visible;
+            animation: fadeInOut 3s ease-in-out;
+        }
+    
+        @keyframes fadeInOut {
+            0%, 100% {
+                opacity: 0;
+                transform: translateX(-50%) translateY(20px);
+            }
+            10%, 90% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+    
+        .toast .icon {
+            margin-right: 10px;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    
+        .toast .icon i {
+            color: white;
+        }
+
+/* Diálogo */
+.dialog-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.dialog {
+    background: rgb(0, 0, 0);
+    width: 40%;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    animation: zoomIn 0.3s ease;
+}
+
+.dialog h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+.dialog p {
+    font-size: 1rem;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+.dialog-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.dialog .btn {
+    width: 16vw;
+    font-size: 1rem;
+}
+
+.dialog .btn:first-child {
+    background: #28a745;
+}
+
+.dialog .btn:last-child {
+    background: #dc3545;
+}
+
+/* Animações */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.9);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+        .items ul li.active a {
+            background: rgba(255, 255, 255, 0.4); /* Fundo mais claro para o item ativo */
+            color: #fff; /* Mantém o texto branco */
+            font-weight: bold; /* Destaca o texto */
+            transform: translateX(10px); /* Destaca visualmente */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="menu-container">
+        <img src="{{url_for('static', path='/img/cs.png')}}" class="logo">
+        <div class="items">
+            <ul>
+                <li class="{% if current_path == url_for('CriarBanco') %}active{% endif %}">
+                    <a href="{{ url_for('CriarBanco') }}">Lista</a>
+                </li> <br>
+                <li class="{% if current_path == url_for('Cardapio') %}active{% endif %}">
+                    <a href="{{ url_for('Cardapio') }}" class="bla" style= "
+                    background: rgba(255, 255, 255, 0.2);
+                    
+                ">Cardápio</a>
+                </li> <br>
+                <li class="{% if current_path == url_for('Busca') %}active{% endif %}">
+                    <a href="{{ url_for('Busca') }}">Buscar Aluno</a>
+                </li> <br>
+                <li class="{% if current_path == url_for('ADM') %}active{% endif %}">
+                    <a href="{{ url_for('ADM') }}">Dashboard</a>
+                </li> <br>
+                <br>
+                <p></p>
+                <li class="sair"><a href={{ url_for('Admin') }}> Sair </a></li>
+
+            </ul>
+        </div>
+    </div>
+
+    <div class="box">
+        <body class="body2">
+            <div class="container">
+                <h1>Lançamento de Cardápio</h1>
+                <form id="formCardapio">
+                    <label for="data">Data:</label>
+                    <input type="date" id="data" name="data" required>
+            
+                    <label for="descricao">Descrição:</label>
+                    <textarea id="descricao" name="descricao" rows="4" required></textarea>
+            
+                    <button type="button" onclick="validateAndOpenDialog()">Enviar Cardápio</button>
+                </form>
+            </div>
+            
+    
+            <div class="dialog-overlay" id="dialogOverlay" style="display: none;">
+                <div class="dialog">
+                    <h2>Confirmar lançamento?</h2>
+                    <p>Você está prestes a lançar o cardápio com as informações fornecidas.</p>
+                    
+                    <div class="dialog-buttons">
+                        <button class="btn" style="background-color: #28a745;" onclick="submitForm()">Confirmar</button>
+                        <button class="btn" style="background-color: #dc3545;" onclick="closeDialog()">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+            
+            <script>
+
+                function validateAndOpenDialog() {
+                    const data = document.getElementById("data").value;
+                    const descricao = document.getElementById("descricao").value;
+            
+                    if (!data || !descricao) {
+                        alert("Por favor, preencha todos os campos antes de continuar.");
+                        return;
+                    }
+            
+                  
+                    document.getElementById("dialogOverlay").style.display = "flex";
+                }
+            
+        
+                function closeDialog() {
+                    document.getElementById("dialogOverlay").style.display = "none";
+                }
+            
+         
+                async function submitForm() {
+                    const form = document.getElementById("formCardapio");
+                    const formData = new FormData(form);
+            
+                    try {
+                        
+                        const response = await fetch("/infocardapio", {
+                            method: "POST",
+                            body: formData,
+                        });
+            
+                        if (response.ok) {
+                            const responseData = await response.json();
+                            if (responseData.msg) {
+                                closeDialog();
+                                showToast(responseData.conteudo, true);
+                                form.reset();
+                            } else {
+                                showToast(responseData.conteudo, false);
+                            }
+
+
+                        } else {
+                            alert("Houve um erro ao tentar lançar o cardápio.");
+                        }
+                    } catch (error) {
+                        console.error("Erro:", error);
+                        alert("Erro ao enviar os dados.");
+                    }
+                }
+
+
+                function showToast(message, success = true) {
+                    const toast = document.getElementById("toast");
+                    const toastMessage = document.querySelector(".toast .message");
+                
+                 
+                    toastMessage.textContent = message;
+                
+                 
+                    toast.style.backgroundColor = success ? "#28a745" : "#dc3545";
+                
+             
+                    toast.classList.add("show");
+                
+               
+                    setTimeout(() => {
+                        toast.classList.remove("show");
+                    }, 3000);
+                }
+            </script>
+
+            <div id="toast" class="toast">
+                <div class="message">
+                </div>
+            </div>
+        
+
+      
+
+    
+
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dicas de Nutrição</title>
+    <link rel="icon" href="static/img/logocps.png" type="image/x-icon">
+    <link rel="stylesheet" href="{{url_for('static', path='./css/dicasnutricao.css')}}">
+</head>
+<body>
+
+
+    <div class="menu-container">
+        <img src="{{url_for('static', path='/img/cs.png')}}" class="logo">
+
+
+        <div class="items">
+            <ul>
+  
+                <li><a href={{ url_for('Dicas') }} class="bla" style= "
+                    background: rgba(255, 255, 255, 0.2);
+                "> Dicas de nutrição </a></li><br>
+                <li><a href={{ url_for('Agenda') }}> Agendar </a></li><br>
+                <p></p>
+                <li class="sair"><a href={{ url_for('Logout') }}> Sair </a></li>
+
+            </ul>
+        </div>
+    </div>
+    </div>
+
+
+
+    <section class="content">
+        <article>
+            <h2>Introdução</h2>
+            <p>A alimentação saudável é essencial para manter o corpo e a mente em equilíbrio. Com escolhas alimentares inteligentes, você pode garantir energia, bem-estar e qualidade de vida. Além disso, uma dieta balanceada pode ajudar a prevenir doenças crônicas, como diabetes, hipertensão e doenças cardíacas. Nesta página, você encontrará dicas práticas e fáceis de implementar para transformar seus hábitos alimentares e alcançar um estilo de vida mais saudável.</p>
+        </article>
+        <article>
+            <h2>Importância da Hidratação</h2>
+            <p>A água é um componente essencial para o funcionamento do organismo. Ela desempenha papéis cruciais, como transportar nutrientes, regular a temperatura do corpo, ajudar na digestão e remover toxinas. Sem a hidratação adequada, o corpo pode sofrer de desidratação, que causa fadiga, dor de cabeça, confusão e até problemas de saúde mais sérios. A recomendação geral é de pelo menos 2 litros de água por dia, mas isso pode variar de acordo com fatores como nível de atividade física e clima. Além da água, chás e sucos naturais sem açúcar também podem contribuir para sua hidratação.</p>
+        </article>
+        <article>
+            <h2>Coma Alimentos Integrais</h2>
+            <p>Alimentos integrais são aqueles que não passaram por processamento excessivo e mantêm suas características naturais, como grãos, frutas, legumes e vegetais. Eles são ricos em fibras, vitaminas, minerais e fitoquímicos, que ajudam a prevenir doenças e promovem a saúde digestiva. Por exemplo, ao invés de escolher pão branco, opte por pães e cereais integrais. As fibras presentes nesses alimentos ajudam a manter a saciedade por mais tempo e ajudam a controlar os níveis de açúcar no sangue. Além disso, o consumo de alimentos integrais pode melhorar a saúde intestinal, reduzindo o risco de doenças como a síndrome do intestino irritável.</p>
+        </article>
+        <article>
+            <h2>Equilíbrio é a Chave</h2>
+            <p>Para uma alimentação saudável, o equilíbrio entre os diferentes macronutrientes é fundamental. Carboidratos, proteínas e gorduras devem estar presentes em todas as refeições, em proporções adequadas para fornecer energia, crescimento e reparo dos tecidos corporais. Carboidratos complexos, como batata-doce, arroz integral e quinoa, fornecem energia de forma gradual. As proteínas, encontradas em carnes magras, ovos, legumes e leguminosas, são essenciais para a construção muscular e o funcionamento do sistema imunológico. As gorduras boas, como as encontradas em abacate, azeite de oliva e nozes, são fundamentais para a saúde do coração e do cérebro. Não se esqueça de moderar o consumo de gorduras saturadas e trans.</p>
+        </article>
+        <article>
+            <h2>Planeje Suas Refeições</h2>
+            <p>O planejamento das refeições é uma estratégia eficaz para evitar escolhas alimentares impulsivas e manter uma dieta equilibrada. Dedique um tempo no início da semana para planejar suas refeições, criando uma lista de compras com os alimentos que você precisará. Isso não só ajuda a manter uma dieta balanceada, mas também pode economizar tempo e dinheiro. Além disso, preparar refeições caseiras permite que você tenha controle sobre os ingredientes usados e evite os aditivos e conservantes encontrados em alimentos processados. Se você tiver uma rotina agitada, considere preparar e congelar algumas porções de refeições saudáveis para os dias em que não tiver tempo para cozinhar.</p>
+        </article>
+        <article>
+            <h2>Evite Dietas Extremas</h2>
+            <p>Dietas da moda e abordagens extremas podem levar a resultados rápidos, mas geralmente não são sustentáveis.

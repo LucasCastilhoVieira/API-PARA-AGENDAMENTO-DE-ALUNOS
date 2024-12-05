@@ -1,0 +1,230 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: rgb(252, 249, 249);
+    color: #333333; /* Texto em tom de cinza escuro */
+}
+
+/* Nome do usuário */
+.nomes {
+    position: absolute;
+    top: 3vh;
+    right: -3vw;
+    transform: translateX(-50%);
+    font-size: 1.5rem;  
+    font-weight: bold;
+    color: white;
+    background: rgba(62, 11, 11, 0.7); /* Cor de fundo mais forte */
+    padding: 10px 20px;
+    border-radius: 25px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
+
+
+.menu-container {
+    position: fixed;
+    background: linear-gradient(180deg, #0c1b5f, #130d3d); 
+    height: 100vh;
+    width: 15%;
+    box-shadow: 2px 0 15px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+    padding: 20px 10px;
+}
+
+.logo {
+    display: block;
+    width: 80%;
+    margin: 20px auto;
+    border-radius: 10px;
+    filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.5));
+}
+
+.items ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 30px;
+}
+
+.items ul li {
+    margin: 20px 0;
+}
+
+.items a {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: white;
+    padding: 10px;
+    display: block;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.items a:not(.bla):hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateX(10px);
+}
+
+/* Caixa de agendamento */
+.box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding-left: 17%;
+}
+
+.container {
+    background: #f9f9f9; /* Fundo da caixa de agendamento mais claro */
+    width: 70vw;
+    border-radius: 10px;
+    padding: 20px 30px;
+    filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.5));
+    animation: fadeIn 0.5s ease;
+}
+
+.container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2rem;
+    color: #333;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 10px;
+}
+
+/* Estilo para os campos do formulário */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    font-size: 1rem;
+    color: #666;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px; /* Aumentado o padding para dar mais destaque */
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 10px; /* Bordas mais arredondadas */
+    background: #f9f9f9;
+    color: #666;
+    box-shadow: inset 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Botão */
+.btn {
+    width: 20vw;
+    padding: 12px; /* Aumentando o tamanho do botão */
+    font-size: 1.1rem;
+    color: white;
+    background: linear-gradient(90deg, #8c2c37, #430404);
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+
+.btn:hover {
+    background: linear-gradient(90deg, #e72a40, #430404);
+    transform: scale(1.05);
+}
+
+/* Diálogo */
+.dialog-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.dialog {
+    background: rgb(0, 0, 0);
+    width: 40%;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    animation: zoomIn 0.3s ease;
+}
+
+.dialog h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+.dialog p {
+    font-size: 1rem;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+.dialog-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.dialog .btn {
+    width: 16vw;
+    font-size: 1rem;
+}
+
+.dialog .btn:first-child {
+    background: #28a745;
+}
+
+.dialog .btn:last-child {
+    background: #dc3545;
+}
+
+/* Animações */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.9);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+
+
+.dialog2 {
+    display: none; 
+    position: fixed;
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4); /* Fundo semitransparente */
+   
+}

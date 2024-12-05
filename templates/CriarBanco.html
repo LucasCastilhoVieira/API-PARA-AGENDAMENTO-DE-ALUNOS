@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seleção de Sala</title>
+    <link rel="stylesheet" href="{{url_for('static', path='./css/CriarBanco.css')}}">
+    <link rel="icon" href="static/img/logocps.png" type="image/x-icon">
+    <style>
+        .alunos-container {
+            position: absolute;
+            left: 20vw;
+            width: 70vw;
+            top: 115vh;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            margin-top: 30px;
+            padding-bottom: 30px;
+        
+            display: none; 
+        }
+        
+        .alunos-container h3 {
+            color: #b52e2b;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse; 
+            margin-top: 10px;
+            table-layout: fixed; 
+        }
+        
+        th, td {
+            padding: 12px 20px;
+            text-align: left;
+            vertical-align: middle; 
+        }
+        
+        th {
+            background-color: #8a1c1b;
+            color: white;
+            font-size: 1.1em;
+            font-weight: bold;
+            border: none; 
+            border-radius: 0px 0px 0px 0px;
+        }
+        
+        td {
+            background-color: #f8d7da; 
+            color: #333; 
+            font-size: 1em;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        
+        /* Efeito de hover nas linhas 
+        tr:hover td {
+            background-color: #c77a7a; 
+            cursor: pointer; 
+        }
+        
+      
+        td {
+            border-radius: 0; 
+        }
+        
+      
+        tr:first-child th {
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+        
+        /* Efeito de hover em células */
+        td:hover {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+
+        th:first-child, td:first-child {
+            border-left: none; 
+        }
+        
+        th:last-child, td:last-child {
+            border-right: none; 
+        }
+        
+        .mensagem-sucesso {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .salas {
+            color: black; 
+            margin-top: 30px;
+            font-size: 2rem; 
+            font-weight: bold; 
+            text-align: center;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            border-top: 2px solid #e60000; 
+            border-bottom: 2px solid #e60000; 
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .info-table label {
+            font-size: 1rem;
+            color: #666;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 8px;
+ 
+        }
+        
+        .info-table input {
+            width: 60vw;
+            padding: 12px; 
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background: #f9f9f9;
+            color: #666;
+            box-shadow: inset 0px 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 10px;
+        }
+        #dataAlmoco{
+   
+            width: 7vw;
+        }
+
+#quantidade{
+    width: 6vw;
+}
+.items ul li.active a {
+    background: rgba(255, 255, 255, 0.4); 
+    color: #fff; /* Mantém o texto branco 
+    font-weight: bold; /* Destaca o texto 
+    transform: translateX(10px);
+}
+
+    </style>
+</head>
+<body>
+
+    <div class="nomes">
+        Olá, {{nome}}!
+    </div>
+
+    <div class="menu-container">
+        <img src="{{url_for('static', path='/img/cs.png')}}" class="logo">
+
+        <div class="items">
+            <ul>
+                <li class="{% if current_path == url_for('CriarBanco') %}active{% endif %}">
+                    <a href="{{ url_for('CriarBanco') }}" class="bla" style= "
+                    background: rgba(255, 255, 255, 0.2);  
+                ">Lista</a>
+                </li> <br>
+                <li class="{% if current_path == url_for('Cardapio') %}active{% endif %}">
+                    <a href="{{ url_for('Cardapio') }}">Cardápio</a>
+                </li> <br>
+                <li class="{% if current_path == url_for('Busca') %}active{% endif %}">
+                    <a href="{{ url_for('Busca') }}">Buscar Aluno</a>
+                </li> <br>
+                <li class="{% if current_path == url_for('ADM') %}active{% endif %}">
+                    <a href="{{ url_for('ADM') }}">Dashboard</a>
+                </li> <br>
+                <br>
+                <p></p>
+                <li class="sair"><a href={{ url_for('Admin') }}> Sair </a></li>
+
+
+            </ul>
+        </div>
+    </div>
+
+    <div class="description-container">
+        <h2>Como Funciona a Página</h2>
+        <p>Aqui você pode criar um banco de dados de alunos com base na sala e no estado do almoço. Veja como funciona:</p>
+        <ul>
+            <li><strong>Seleção de Sala:</strong> Escolha a sala dos alunos.</li>
+            <li><strong>Estado de Almoço:</strong> Defina se os alunos almoçam ou não.</li>
+            <li><strong>Criar Banco:</strong> Clique em "Criar" para gerar o banco de dados.</li>
+            <li><strong>Mensagem de Sucesso:</strong> Após criar, você receberá um link para acessar o banco de dados em PDF.</li>
+        </ul>
+    </div>
+
+    <!-- Formulário para criar banco de dados -->
+    <div class="form-container">
+        <h1>GERAR BANCO DE ALUNOS</h1>
+        <form action="/BANCO" method="post">
+            <div class="form-group">
+                <label for="sala">SALA:</label>
+                <select name="sala" id="sala" required class="sala">
+                    <option value="">Selecione...</option>
+                    <option value="GERAL, 1º DESENVOLVIMENTO DE SISTEMAS, 1º ENSINO MÉDIO, 1º MECATRÔNICA, 2º DESENVOLVIMENTO DE SISTEMAS, 2º ENSINO MÉDIO, 2º MECATRÔNICA, 3º DESENVOLVIMENTO DE SISTEMAS, 3º ENSINO MÉDIO, 3º MECATRÔNICA">GERAL</option>
+                    <option value="1º DESENVOLVIMENTO DE SISTEMAS">1º DESENVOLVIMENTO DE SISTEMAS</option>
+                    <option value="1º ENSINO MÉDIO">1º ENSINO MÉDIO</option>
+                    <option value="1º MECATRÔNICA">1º MECATRÔNICA</option>
+                    <option value="2º DESENVOLVIMENTO DE SISTEMAS">2º DESENVOLVIMENTO DE SISTEMAS</option>
+                    <option value="2º ENSINO MÉDIO">2º ENSINO MÉDIO</option>
+                    <option value="2º MECATRÔNICA">2º MECATRÔNICA</option>
+                    <option value="3º DESENVOLVIMENTO DE SISTEMAS">3º DESENVOLVIMENTO DE SISTEMAS</option>
+                    <option value="3º ENSINO MÉDIO">3º ENSINO MÉDIO</option>
+                    <option value="3º MECATRÔNICA">3º MECATRÔNICA</option>
+                </select>
+            </div>
+    
+            <div class="form-group">
+                <label for="estado">ESTADO DE ALMOÇO:</label>
+                <select name="estado" id="estado" required>
+                    <option value="">Selecione...</option>
+                    <option value="sim">Sim</option>
+                    <option value="nao">Não</option>
+                </select>
+            </div>
+    
+            <div class="form-group">
+                <input type="submit" class="btn" value="Criar">
+            </div>
+    
+            {%if mensagem%}
+                    <div class="mensagem-sucesso">
+                        <p class="sucesso">{{ mensagem }}</p>
+                        Para fazer o download,  
+                        {% if create_general == False %}
+                        <a href="#" class="bancoclick" id="downloadPdfLink">Clique Aqui</a>
+                        
+                        <script>
+                            document.getElementById("downloadPdfLink").addEventListener("click", async function(event) {
+                                event.preventDefault(); 
+                                
+                                const json = {
+                                    "sala": "{{ sala }}",
+                                    "estado": "{{ estado }}" 
+                                };
+                            
+                                try {
+                         
+                                    const response = await fetch("/createpdfclass", {
+                                        method: "POST",
+                                        headers: {
+                                            'Content-Type': 'application/json',
+                                            'Accept': 'application/pdf', 
+                                        },
+                                        body: JSON.stringify(json)  
+                                    });
+                            
+                                    if (response.ok) {
+                                        const blob = await response.blob();  
+                                        
+                                       
+                                        const link = document.createElement('a');
+                                        const url = URL.createObjectURL(blob);
+                                        link.href = url;
+                                        link.download = `${json.sala} - Lista.pdf`;  
+                                        link.click();
+                                        URL.revokeObjectURL(url);  
+
+
+                                    } else {
+                                        console.error("Erro ao gerar o PDF:", response.statusText);
+                                    }
+                                } catch (error) {
+                                    console.error("Erro ao fazer a requisição:", error);
+                                }
+                                json_delete = {
+                                    "sala": "{{sala}}",
+                                    "data": "{{dataofc}}"
+                                }
+                                try {
+
+                                    const response = await fetch("/deletepdf", {
+                                        method: "POST",
+                                        headers: {
+                                            'Content-Type': 'application/json',
+                                        },
+                                        body: JSON.stringify(json_delete)
+                                    });
+                    
+                                    if (response.ok) {
+                                        const data = await response.json();
+                                        console.log(data.message);
+                                    } else {
+                                        console.error("Erro ao deletar o PDF:", response.statusText);
+                                    }
+                                } catch (error) {
+                                    console.error("Erro ao fazer a requisição de exclusão:", error);
+                                }
+
+
+
+
+                            });
+                        </script>
+                        
+                        {% endif %}
+                        {% if create_general == True %}
+                        <a href="#" class="bancoclick" id="downloadPdfLink">Clique Aqui</a>
+
+
+                        <script>
+                            document.getElementById("downloadPdfLink").addEventListener("click", async function(event) {
+                                event.preventDefault(); 
+                                
+                                const json = {
+                                    "sala": "{{ salas }}", 
+                                    "estado": "{{ estado }}" 
+                                };
+                            
+                                try {
+                                   
+                                    const response = await fetch("/createpdfgeneral", {
+                                        method: "POST",
+                                        headers: {
+                                            'Content-Type': 'application/json',
+                                            'Accept': 'application/pdf', 
+                                        },
+                                        body: JSON.stringify(json)  
+                                    });
+                            
+                                    if (response.ok) {
+                                        const blob = await response.blob();  
+                                        
+                                        
+                                        const link = document.createElement('a');
+                                        const url = URL.createObjectURL(blob);
+                                        link.href = url;
+                                        link.download = `ListaCompleta - Alunos.pdf`;  
+                                        link.click();  
+                                        URL.revokeObjectURL(url); 
+                                    } else {
+                                        console.error("Erro ao gerar o PDF:", response.statusText);
+                                    }
+                                } catch (error) {
+                                    console.error("Erro ao fazer a requisição:", error);
+                                }
+
+                                delete_general = {
+                                    "data": "{{dataofc}}"
+                                }
+                                try {
+
+                                    const response = await fetch("/deletegeneral", {
+                                        method: "POST",
+                                        headers: {
+                                            'Content-Type': 'application/json',
+                                        },
+                                        body: JSON.stringify(delete_general)
+                                    });
+                    
+                                    if (response.ok) {
+                                        const data = await response.json();
+                                        console.log(data.message);
+                                    } else {
+                                        console.error("Erro ao deletar o PDF:", response.statusText);
+                                    }
+                                } catch (error) {
+                                    console.error("Erro ao fazer a requisição de exclusão:", error);
+                                }
+
+                            });
+                        </script>
+
+                        {% endif %}
+                    </div>
+                    {% endif %}
+           
+        </form>
+    </div>
+
+    <!-- Exibição dos alunos que marcaram "Sim" para o almoço -->
+    <div class="alunos-container" id="tabela-alunos">
+        <div class="info-table">
+        <label for="cardapio">Cardápio</label>
+        <input type="text" id="cardapio" name="cardapio" value="{{cardapio}}" disabled>
+
+        <label for="data" class="data">Data</label>
+        <input type="text" id="dataAlmoco" name="data" value={{data}} disabled>
+
+        <label for="quantidade">Quantidade</label>
+        <input type="text" id="quantidade" name="quantidade" value={{counter}} disabled>
+        
+    </div>
+        {% for sala in alunos %}
+        <table>
+            
+                <h1 class ="salas">{{sala}}</h1>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Sala</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for aluno in alunos[sala] %}
+                    <tr>
+                        <td>{{ aluno }}</td>
+                        <td>{{ sala }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endfor %}
+    </div>
+
+    <script>
+        {% if alunos %}
+            document.getElementById('tabela-alunos').style.display = 'block';
+        {% endif %}
+    </script>
+
+    <script>
+        window.onload = function() {
+            const links = document.querySelectorAll('.menu ul li');
+            links.forEach(link => {
+                if (window.location.pathname === link.querySelector('a').getAttribute('href')) {
+                    link.classList.add('active');
+                }
+            });
+        };
+    </script>
+
+</body>
+</html>

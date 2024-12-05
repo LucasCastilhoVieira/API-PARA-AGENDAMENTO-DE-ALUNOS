@@ -1,0 +1,104 @@
+*{
+    margin: 0px;
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: rgb(230, 230, 230);
+}
+.textbox .eye {
+    position: absolute;
+    left: 46vw;
+    top: 38.8vh;
+    transform: translateY(-50%);
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+}
+
+.login-form {
+    padding-left: 10vw;
+    width: 49vw;
+    padding: 40px;
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.5);
+   
+    background-color: #ffffff;
+    display: flex;
+    padding-right: 30vw;
+    flex-direction: column;
+    position: absolute;
+    justify-content: center;
+    left: 7vw;
+    top: 16vh;
+    padding-top: 20vh;
+    border-radius: 20px;
+    padding-bottom: 8.1vh;
+}
+.login-form h1 {
+    margin-bottom: 10px;
+}
+.login-form p {
+    margin-bottom: 20px;
+}
+.login-form input {
+    display: block;
+    margin-bottom: 15px;
+    padding: 10px;
+    width: 45vw;
+    font-size: 16px;
+    border: 1px solid #060606;
+    border-radius: 5px;
+}
+
+.login-form a:hover {
+    text-decoration: underline;
+}
+.login-form .btn {
+    padding: 10px;
+    font-size: 16px;
+    color: white;
+    background-color: #920c0c;
+    border: none;
+    border-radius: 5px;
+    width: 46.4vw;
+    cursor: pointer;
+}
+.login-form .btn:hover {
+    background-color: #610707;
+}
+.cs{
+position: absolute;
+width: 15vw;
+right: 6.5vw;
+top: 14vh;
+z-index: 1;
+
+}
+.etec{
+width: 9vw;
+position: absolute;
+top:4vh;
+left: 21vw;
+}
+form{
+display: block;
+}
+.barra{
+top: 0vh;
+height: 100%;
+width: 28.5vw;
+left: 52.6vw;
+background-color: rgba(79, 172, 254, 0.4);
+ position: absolute; 
+ border-radius: 0px 20px 20px 0px;
+}
+.casa{
+width: 3vw;
+position: absolute;
+top: 6vh;
+left: 3vw;
+}
+.home{
+    position: absolute;
+    top: 12.6vh;
+    left: 3.2vw;
+}

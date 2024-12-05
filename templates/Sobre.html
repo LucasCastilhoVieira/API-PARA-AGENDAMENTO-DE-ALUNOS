@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Nós</title>
+
+    <link rel="stylesheet" href="{{url_for('static', path='./css/styleSobre.css')}}">
+</head>
+<body>
+    <nav>
+        <div class="box">
+            <img src="{{url_for('static', path='/img/logo_etec.png')}}">
+            <h2 class="title">COOK SYSTEM</h2>
+            <img src="{{url_for('static', path='/img/logo_cook_system.png')}}">
+        </div>
+    </nav>
+        <div class="text-box">
+            <p class="texto-box">
+                &emsp; &emsp; O <strong>Cook System</strong> é um software de gestão de 
+                cozinha projetado para otimizar processos em restaurantes e cozinhas 
+                profissionais. Ele auxilia no gerenciamento de pedidos, organização de 
+                receitas, controle de estoque e monitoramento do tempo de preparo.
+            </p>
+            <p class="texto-box"> 
+                &emsp; &emsp; Com uma interface intuitiva, o sistema melhora a comunicação
+                entre os setores, reduz erros operacionais e garante maior eficiência na 
+                entrega de pratos. Ideal para estabelecimentos que buscam automatizar suas 
+                operações e oferecer uma experiência gastronômica de alta qualidade.
+            </p>
+        </div>
+        
+        <main class="main-principal">
+            <p class="title">DESENVOLVEDORES</p>
+            <div class="devs">
+                    <div class="container-img">
+                    <img src="{{url_for('static', path='/img/lucas.jpeg')}}" class="dev">
+                        <div class="texto">Lucas Castilho</div>
+                    </div>
+                    <div class="container-img">
+                       
+                    <img src="{{url_for('static', path='/img/marcos.jpeg')}}" class="dev">
+                        <div class="texto">Marcos Alves</div>
+                    </div>
+            </div>
+        </main>
+        <div class="text-box">
+            <div class="lista-texto">
+                <h2 class="texto-titulo">OBJETIVO</h2>
+                <p class="lista-texto-item">
+                    &emsp; &emsp; O objetivo do Cook System é aprimorar a eficiência e a organização das
+                    cozinhas profissionais, automatizando processos como gestão de pedidos e
+                    controle de estoque, para garantir agilidade, reduzir desperdícios e melhorar
+                    a qualidade no atendimento.              
+                </p>
+            </div>
+        
+            <div class="lista-texto">
+                <h2 class="texto-titulo">PRINCÍPIOS</h2>
+                <p class="lista-texto-item">
+                    &emsp; &emsp; O Cook System tem como princípios a eficiência, organização e simplicidade,
+                    otimizando recursos e garantindo qualidade no preparo. Focado em sustentabilidade e
+                    conectividade, melhora a comunicação interna e reduz desperdícios, integrando inovação 
+                    para atender às demandas do setor gastronômico.
+                </p>
+            </div>
+        
+            <div class="lista-texto">
+                <h2 class="texto-titulo">META</h2>
+                <p class="lista-texto-item">
+                    &emsp; &emsp; A meta da Cook System é otimizar a gestão de cozinhas profissionais, melhorando
+                    a eficiência, reduzindo desperdícios e erros, e garantindo qualidade no atendimento. O objetivo 
+                    é integrar os processos do estabelecimento, proporcionando uma operação mais organizada e produtiva.
+                </p>
+            </div>
+
+            <a href={{ url_for('/') }}><button>Voltar</button></a>
+        </div>
+        <footer>
+
+        </footer>
+    
+</body>
+</html>

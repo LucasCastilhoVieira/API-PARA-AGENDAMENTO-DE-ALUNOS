@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', path='./css/login.css')}}">
+    <link rel="icon" href="static/img/logocps.png" type="image/x-icon">
+    <title>Login - Aluno</title>
+    <style>
+
+.msg{
+    position: absolute;
+    top: 43vh;
+    color: red;
+    font-size: 1.3vw;
+    right: 15vw;
+}
+#loading {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+#loading img {
+    width: 100px;
+}
+    </style>
+</head>
+<body>
+    <a href="{{ url_for('/') }}"><img src="{{url_for('static', path='/img/casa.png')}}" class="casa" alt=""></a>
+    <p class="home">INÍCIO</p>
+<div class="container">
+    
+    <div class="register-container">
+        <div class="register-form">
+            <label for="codigo etec"></label>
+
+            
+            <div class="barra">
+                <h2>Bem vindo!</h2>
+                <p class="description description-primary">Clique no ícone para Cadastrar </p>
+                <a href="{{ url_for('Cadastro') }}"><img src="{{url_for('static', path='/img/cs.png')}}" class="cs" alt="Uoou Solutions"></a>
+            </div>
+            <br>
+            <br>
+            <br>
+            <form action="/Users/" method="POST" class="formposition">
+            <h1>Login</h1>
+            <br>
+            Preencha as informações abaixo para entrar no sistema.
+            <br>
+            <img src="{{url_for('static', path='/img/logocps.png')}}" class="etec" alt="Uoou Solutions">
+            
+                  <br>
+                    <input type="text" name="RM" placeholder="RM" class="RM" required>
+                   <br>
+                        <div class="textbox">
+                        <input class="Password" name="password" id="password3" type="Password" placeholder="Senha" required >
+                        <img  src="{{url_for('static', path='/img/eye-closed.png')}}" width="1vw" height="3vh" id="toggleEye3" class="eye3" onclick="togglePassword()">
+                        </div>
+                            <br> 
+                            <br>
+                    <button class="btn btn-second">Entrar</button>
+                    {%if mensagemError %}
+                    <p class="msg">{{mensagemError}}</p>
+                    {%endif%}
+            </form>
+        </div>
+        <div class="image-section"></div>
+    </div>
+</div>
+
+<script>
+
+    function togglePassword() {
+        var passwordField = document.getElementById('password3');
+        var toggleEye = document.getElementById('toggleEye3');
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+            toggleEye.src = "{{url_for('static', path='/img/eye-open.png')}}";
+        } else {
+            passwordField.type = "password";
+            toggleEye.src = "{{url_for('static', path='/img/eye-closed.png')}}";
+        }
+    }
+    setTimeout(function() {
+        const msgElement = document.querySelector('.msg');
+        if (msgElement) {
+            msgElement.textContent = ''; // Limpa a mensagem
+        }
+        
+        
+
+  
+    }, 2000); 
+    history.pushState(null, null, location.href);
+    window.addEventListener('popstate', function (event) {
+        // Sempre empurra o estado atual para bloquear o retorno
+        history.pushState(null, null, location.href);
+        
+    });
+</script>
+</body>
+</html>

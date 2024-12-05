@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendamento</title>
+    <link rel="icon" href="static/img/logocps.png" type="image/x-icon">
+    <link rel="stylesheet" href="{{url_for('static', path='./css/agenda.css')}}">
+<style>
+ 
+    .dialog2 {
+        display: none; 
+        position: fixed;
+        z-index: 1; 
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6); 
+        transition: background-color 0.3s ease;
+    }
+    
+ 
+    .dialog-content2 {
+        background-color: #fff;
+        margin: 20% 40% auto;  
+        padding: 30px;
+        border: 2px solid #eee;
+        width: 80%;
+        max-width: 28vw; 
+        border-radius: 15px;
+        text-align: center;
+        font-size: 1.6vw;
+        height: auto; /* Altura ajustável */
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); 
+        animation: slide-up 0.4s ease-out; 
+    }
+    
+
+    @keyframes slide-up {
+        from {
+            transform: translateY(20px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    
+    .dialog-content2 p {
+        margin: 0;
+        font-size: 1.3rem;
+        color: #333;
+    }
+    
+    
+</style>
+</head>
+<body>
+
+    <div class="nomes">
+        Olá, {{nome}}!
+    </div>
+
+    <div class="menu-container">
+        <img src="{{url_for('static', path='/img/cs.png')}}" class="logo">
+
+
+        <div class="items">
+            <ul>
+  
+                <li><a href={{ url_for('Dicas') }}> Dicas de nutrição </a></li><br>
+                <li><a href={{ url_for('Agenda') }} class="bla" style= "
+                        background: rgba(255, 255, 255, 0.2);
+                        
+                    "> Agendar </a></li><br>
+
+
+                <p></p>
+                <li class="sair"><a href={{ url_for('Logout') }}> Sair </a></li>
+
+            </ul>
+        </div>
+    </div>
+    </div>
+<div class="box">
+
+    <div class="container">
+        <h1>AGENDAMENTO</h1>
+        <form action="/agendaraluno" id="agendamentoForm">
+            <div class="form-group">
+                {%if cardapio%}
+                <label for="cardapio">Cardápio</label>
+                <input type="text" id="cardapio" name="cardapio" value="{{cardapio}}" disabled>
+                {%endif%}
+            </div>
+
+            <div class="form-group">
+                <label for="data">Data</label>
+                <input type="text" id="dataAlmoco" name="data" value="" disabled>
+            </div>
+
+            <div class="form-group">
+                <label for="prazo">Prazo de Agendamento</label>
+                <input type="text" id="prazo" name="prazo" value="19h - 23h" disabled>
+            </div>
+           <br>
+            <button type="button" id="btnAgendar" class="btn" onclick="openDialog()">Agendar</button>
+        </form>
+    </div>
+
+    <div id="dialog2" class="dialog2">
+
+        <div class="dialog-content2">
+          
+            <p>O agendamento só pode ser feito entre às 19:00 e 23:00.</p>
+            
+        </div>
+    </div>
+
+    <div class="dialog-overlay" id="dialogOverlay">
+        <div class="dialog">
+            <h2>Confirmar Agendamento?</h2>
+            <p>Você está prestes a agendar com as informações fornecidas.</p>
+            
+            <div class="dialog-buttons">
+            <form action="/agendaraluno" method="post">
+                <button class="btn" style="background-color: #28a745;" onclick="confirmAgendamento()">Confirmar</button>
+            </form>
+            
+                <button class="btn"  style="background-color: #dc3545;" onclick="closeDialog()">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+    <script>
+
+        function openDialog() {
+            var dataAtual = new Date();
+            var horaAtual = dataAtual.getHours(); 
+
+            if (horaAtual < 19 || horaAtual >= 23) {
+                document.getElementById('dialog2').style.display = "block";
+            }
+            else{
+                document.getElementById("dialogOverlay").style.display = "flex";
+            }
+
+        }
+
+        function closeDialog() {
+            document.getElementById("dialogOverlay").style.display = "none";
+        }
+
+
+
+        
+        function confirmAgendamento() {
+            closeDialog();
+   
+        }
+        
+
+        function proximaSegunda(data) {
+
+            const novaData = new Date(data);
+            if (novaData.getDay() === 5) {
+    
+                novaData.setDate(novaData.getDate() + 3);
+            }
+            else{
+            novaData.setDate(novaData.getDate() + 1)
+            }
+            return novaData    
+        }
+        
+        function mostrarDataAlmoco(){
+        var data = new Date()
+        data = proximaSegunda(data)
+    
+        var options = { year: 'numeric', month: 'long', day: 'numeric'}
+        var dataFormatada = data.toLocaleDateString('pt-BR', options)
+    
+        document.getElementById('dataAlmoco').value = dataFormatada;
+    }
+    mostrarDataAlmoco()
+    </script>
+</body>
+</html>

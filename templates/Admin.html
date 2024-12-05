@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', path='./css/Admin.css')}}">
+    <link rel="icon" href="static/img/logocps.png" type="image/x-icon">
+
+    <title>Login - Admin</title>
+<style>
+    
+.msg{
+    position: absolute;
+    top: 53vh;
+    color: red;
+    font-size: 1.3vw;
+    left: 17vw;
+}
+</style>
+</head>
+<body>
+    <a href="{{ url_for('/') }}"><img src="static/img/casa.png" class="casa" alt=""></a>
+    <p class="home">INÍCIO</p>
+<div class="container"> 
+
+    <div class="login-container">
+        <div class="login-form">
+            
+
+            <br>
+            <div class="barra">
+                <img src="static/img/cs.png" class="cs" alt="Uoou Solutions">
+            </div>
+            <img src="static/img/logocps.png" class="etec" alt="Uoou Solutions">
+            <form action="/admin" method="post">
+            <h1>Login</h1>  
+            <p>Preencha as informações abaixo para acessar o Painel Administrativo.</p>
+            <input type="email" name="username" class="username" placeholder="exemplo@gmail.com"  required>
+            <div class="textbox">
+            <input type="password" placeholder="Senha" id="password" name="password" required>
+            <img src="{{url_for('static', path='/img/eye-closed.png')}}" id="toggleEye" class="eye" onclick="togglePassword()">
+        </div>
+<br>
+<br>
+        <input type="submit" class="btn" onclick="requestform()" value="Entrar">
+        {% if msg %}
+        <p class="msg">{{ msg }}</p>
+        {%endif%}
+        </form>
+
+        </div>
+        <div class="image-section"></div>
+    </div>
+</div>
+
+<script>
+
+
+    function togglePassword() {
+        var passwordField = document.getElementById('password');
+        var toggleEye = document.getElementById('toggleEye');
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+            toggleEye.src = "{{url_for('static', path='/img/eye-open.png')}}";
+        } else {
+            passwordField.type = "password";
+            toggleEye.src = "{{url_for('static', path='/img/eye-closed.png')}}";
+        }
+    }
+    setTimeout(function() {
+        const msgElement = document.querySelector('.msg');
+        if (msgElement) {
+            msgElement.textContent = ''; // Limpa a mensagem
+        }
+        
+
+    }, 2000); 
+    history.pushState(null, null, location.href);
+    window.addEventListener('popstate', function (event) {
+        // Sempre empurra o estado atual para bloquear o retorno
+        history.pushState(null, null, location.href);
+    
+    });
+</script>
+</body>
+</html>
